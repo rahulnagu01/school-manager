@@ -1,0 +1,117 @@
+.container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 32px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 20px rgba(0,0,0,0.08);
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+.form h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 5px;
+  color: #222;
+}
+
+.subtitle {
+  margin-bottom: 25px;
+  color: #555;
+  font-size: 1.05rem;
+}
+
+.form label {
+  display: block;
+  margin-bottom: 16px;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.form input {
+  display: block;
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 1rem;
+  margin-top: 6px;
+  border: 1.5px solid #ddd;
+  border-radius: 6px;
+  background: #fafafa;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form input:focus {
+  border-color: #3b82f6;
+  background: #fff;
+}
+
+.row {
+  display: flex;
+  gap: 36px;
+  margin-bottom: 20px;
+}
+
+.row label {
+  flex: 1;
+}
+
+@media (max-width: 640px) {
+  .row {
+    flex-direction: column;
+  }
+}
+
+.actionRow {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.cancelBtn {
+  padding: 10px 24px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  background: #e5e7eb;
+  color: #222;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.cancelBtn:hover {
+  background: #d1d5db;
+}
+
+.submitBtn {
+  padding: 10px 28px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  background: #3b82f6;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.submitBtn:disabled {
+  background: #93c5fd;
+  cursor: not-allowed;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: #2563eb;
+}
+
+.form span {
+  color: #e11d48;
+  font-size: 0.9rem;
+}
+
+.message {
+  margin-top: 18px;
+  color: green;
+  font-weight: 500;
+}
