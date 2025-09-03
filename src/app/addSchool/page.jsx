@@ -80,6 +80,7 @@ export default function AddSchool() {
           {errors.image && <span>Image is required</span>}
         </label>
 
+      
         {/* Styled Buttons */}
         <div className={styles.actionRow}>
           <button
@@ -99,6 +100,7 @@ export default function AddSchool() {
         </div>
 
         {message && <div className={styles.message}>{message}</div>}
+        
       </form>
     </div>
   );
