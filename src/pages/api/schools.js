@@ -1,65 +1,49 @@
 import { getConnection } from '../../lib/db';
-import { IncomingForm } from 'formidable';
 import { v2 as cloudinary } from 'cloudinary';
-import fs from 'fs';
 
-export const config = { api: { bodyParser: false } };
-
-// Configure Cloudinary
+// Configure Cloudinary with env vars
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// Helper to always coerce a field to a plain value, not array
-function getSingle(value) {
-  return Array.isArray(value) ? value[0] : value;
-}
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '10mb', // Allow larger uploads
+    },
+  },
+};
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const form = new IncomingForm({ keepExtensions: true });
+    try {
+      const { name, address, city, state, contact, email_id, image } = req.body;
 
-    form.parse(req, async (err, fields, files) => {
-      if (err) return res.status(400).json({ error: "Image upload error" });
+      let imageUrl = null;
 
-      const name = getSingle(fields.name);
-      const address = getSingle(fields.address);
-      const city = getSingle(fields.city);
-      const state = getSingle(fields.state);
-      const contact = getSingle(fields.contact);
-      const email_id = getSingle(fields.email_id);
-
-      let image = "";
-      let fileObj = files?.image;
-      if (Array.isArray(fileObj)) fileObj = fileObj[0];
-
-      if (fileObj) {
-        try {
-          const uploadRes = await cloudinary.uploader.upload(fileObj.filepath, {
-            folder: "schools",
-          });
-          image = uploadRes.secure_url; // Use Cloudinary URL instead of local path
-        } catch (uploadErr) {
-          console.error("Cloudinary upload error:", uploadErr);
-          return res.status(500).json({ error: "Cloudinary upload failed" });
-        }
+      // If frontend sent base64 data, upload to Cloudinary
+      if (image) {
+        const uploadRes = await cloudinary.uploader.upload(image, {
+          folder: 'schools',
+        });
+        imageUrl = uploadRes.secure_url;
       }
 
-      try {
-        const conn = await getConnection();
-        await conn.execute(
-          'INSERT INTO schools (name, address, city, state, contact, image, email_id) VALUES (?, ?, ?, ?, ?, ?, ?)',
-          [name, address, city, state, contact, image, email_id]
-        );
-        await conn.end();
-        res.status(200).json({ success: true });
-      } catch (error) {
-        res.status(500).json({ error: error.message });
-      }
-    });
+      // Insert into DB
+      const conn = await getConnection();
+      await conn.execute(
+        'INSERT INTO schools (name, address, city, state, contact, image, email_id) VALUES (?, ?, ?, ?, ?, ?, ?)',
+        [name, address, city, state, contact, imageUrl, email_id]
+      );
+      await conn.end();
 
+      res.status(200).json({ success: true, image: imageUrl });
+    } catch (error) {
+      console.error("DB insert error:", error);
+      res.status(500).json({ error: error.message });
+    }
   } else if (req.method === 'GET') {
     try {
       const conn = await getConnection();
@@ -73,6 +57,7 @@ export default async function handler(req, res) {
     res.status(405).json({ error: 'Method not allowed' });
   }
 }
+
 
 
 // import { getConnection } from '../../lib/db';

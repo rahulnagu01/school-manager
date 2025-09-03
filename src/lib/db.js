@@ -1,3 +1,4 @@
+import fs from 'fs';
 import mysql from 'mysql2/promise';
 
 export async function getConnection() {
@@ -7,6 +8,6 @@ export async function getConnection() {
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     port: process.env.DB_PORT,
-    ssl: { rejectUnauthorized: true }
+    ssl: { rejectUnauthorized: false }
   });
 }

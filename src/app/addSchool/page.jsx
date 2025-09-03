@@ -11,30 +11,42 @@ export default function AddSchool() {
   const onSubmit = async (data) => {
     setUploading(true);
     setMessage('');
-    
-    const formData = new FormData();
-    for (const key in data) {
-      if (key === "image") {
-        formData.append("image", data.image[0]);
-      } else {
-        formData.append(key, data[key]);
-      }
-    }
+
     try {
-      const res = await fetch("/api/schools", {
-        method: "POST",
-        body: formData,
-      });
-      if (res.ok) {
-        setMessage("School added successfully!");
-        reset();
-      } else {
-        setMessage("Error adding school");
-      }
+      // Convert file to Base64
+      const file = data.image[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+
+      reader.onloadend = async () => {
+        // Send all form data + base64 image to backend
+        const res = await fetch("/api/schools", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: data.name,
+            address: data.address,
+            city: data.city,
+            state: data.state,
+            contact: data.contact,
+            email_id: data.email_id,
+            image: reader.result, // base64 string
+          }),
+        });
+
+        if (res.ok) {
+          setMessage("School added successfully!");
+          reset();
+        } else {
+          setMessage("Error adding school");
+        }
+        setUploading(false);
+      };
     } catch (err) {
-      setMessage("Network error");
+      console.error(err);
+      setMessage("Network or upload error");
+      setUploading(false);
     }
-    setUploading(false);
   };
 
   return (
@@ -80,8 +92,6 @@ export default function AddSchool() {
           {errors.image && <span>Image is required</span>}
         </label>
 
-      
-        {/* Styled Buttons */}
         <div className={styles.actionRow}>
           <button
             type="button"
@@ -100,11 +110,11 @@ export default function AddSchool() {
         </div>
 
         {message && <div className={styles.message}>{message}</div>}
-        
       </form>
     </div>
   );
 }
+
 
 
 // "use client";
