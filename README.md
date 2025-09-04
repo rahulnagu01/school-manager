@@ -1,7 +1,7 @@
 # School Manager(Mini project) – Next.js Project
 
--> add school
--> view schools
+1. add school
+2. view schools
 
 This is a Next.js project bootstrapped with create-next-app as part of the Web Development assignment.
 
@@ -37,6 +37,7 @@ Before running the project, create a .env.local file in the root directory.
 
 👉 Example file: .env.example
 
+```bash
 # Database Configuration
 DB_HOST=your_db_host
 DB_USER=your_db_user
@@ -48,7 +49,7 @@ DB_PORT=your_db_port
 CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
 CLOUDINARY_API_KEY=your_cloudinary_api_key
 CLOUDINARY_API_SECRET=your_cloudinary_api_secret
-
+```
 
 📘 Learn More
 
