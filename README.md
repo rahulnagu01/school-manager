@@ -1,10 +1,14 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+School Manager(Mini project) – Next.js Project
+-> add school
+-> view schools
 
-## Getting Started
+This is a Next.js project bootstrapped with create-next-app as part of the Web Development assignment.
 
-First, run the development server:
+🚀 Getting Started
 
-```bash
+Install dependencies and run the development server:
+
+npm install
 npm run dev
 # or
 yarn dev
@@ -12,25 +16,54 @@ yarn dev
 pnpm dev
 # or
 bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+The app will be available at:
+👉 http://localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+📂 Project Structure
 
-## Learn More
+app/page.js → Main entry page (you can start editing from here).
 
-To learn more about Next.js, take a look at the following resources:
+Auto-updates on save for faster development.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Uses next/font to optimize and load Geist font by Vercel.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+⚙️ Environment Variables
 
-## Deploy on Vercel
+Before running the project, create a .env.local file in the root directory.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+👉 Example file: .env.example
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Database Configuration
+DB_HOST=your_db_host
+DB_USER=your_db_user
+DB_PASSWORD=your_db_password
+DB_NAME=your_db_name
+DB_PORT=your_db_port
+
+# Cloudinary Configuration
+CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+
+
+📘 Learn More
+
+To learn more about Next.js, check out:
+
+Next.js Documentation
+ – features and API.
+
+Learn Next.js
+ – interactive tutorial.
+
+Next.js GitHub Repository
+ – contributions and discussions.
+
+🚀 Deployment
+
+The easiest way to deploy this project is with Vercel (from the creators of Next.js).
+
+Check the Next.js deployment documentation
+ for more details.
