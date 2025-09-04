@@ -9,15 +9,15 @@ This is a Next.js project bootstrapped with create-next-app as part of the Web D
 
 Install dependencies and run the development server:
 
-npm install
-
+```bash
 npm run dev
-or
+# or
 yarn dev
-or
+# or
 pnpm dev
-or
+# or
 bun dev
+```
 
 
 The app will be available at:
