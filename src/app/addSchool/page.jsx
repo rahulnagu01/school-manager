@@ -78,7 +78,7 @@ export default function AddSchool() {
 
         <div className={styles.row}>
           <label>Contact Number
-            <input {...register("contact", { required: true, minLength: 10, maxLength: 15 })} placeholder="Enter contact number" />
+            <input {...register("contact", { required: true, minLength: 10, maxLength: 10 })} placeholder="Enter contact number" />
             {errors.contact && <span>Valid contact number required</span>}
           </label>
           <label>Email ID
