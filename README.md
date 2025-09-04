@@ -1,4 +1,5 @@
-School Manager(Mini project) – Next.js Project
+# School Manager(Mini project) – Next.js Project
+
 -> add school
 -> view schools
 
@@ -9,12 +10,13 @@ This is a Next.js project bootstrapped with create-next-app as part of the Web D
 Install dependencies and run the development server:
 
 npm install
+
 npm run dev
-# or
+or
 yarn dev
-# or
+or
 pnpm dev
-# or
+or
 bun dev
 
 
